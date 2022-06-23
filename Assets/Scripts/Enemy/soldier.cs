@@ -1,16 +1,22 @@
 using System.Collections;
 using Unity.Mathematics;
+using UnityEditor;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class soldier : MonoBehaviour
 {
+    [Header("Munition utilisé")]
+    public Bullet _bullet;
     private Transform transGun;
-    public GameObject Bullet;
+    private GameObject Bullet;
     private bool canShoot=true;
+    
    
     void Awake()
     {
-       transGun= gameObject.transform.GetChild(0);
+        Bullet = _bullet.EnemyBullet[0];
+        transGun= gameObject.transform.GetChild(0);
     }
 
     

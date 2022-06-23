@@ -9,8 +9,6 @@ public class Hunter : MonoBehaviour
     private int RayCastDistance;
     private Vector3 RayCastMove;
     private float RayCastMoveY;
-
-    private int rotation = 0;
     // <>
     void Awake()
     {

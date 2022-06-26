@@ -57,6 +57,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -343,6 +344,17 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Croix: 1336440320741484319
+      Tree3: 2654447934904345190
+      TombeDroite: -9053378900703536071
+      BushCroix: 8333231276030249781
+      "TombePench\xE9e": -93750458980389090
+      Tree2: -4430392651179603617
+      Statue: 5069650035751226587
+      Rock: 4455232240493665095
+      Tree1: 318953615281452700
+      Bush: 2269949439249822484
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

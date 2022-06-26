@@ -168,6 +168,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1107,6 +1108,47 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      tileset-sliced_38: -4252782480052157552
+      tileset-sliced_20: -3143653778693314978
+      tileset-sliced_44: -3589982636622132726
+      tileset-sliced_24: -5483675960577113276
+      tileset-sliced_16: -1212771841240213024
+      tileset-sliced_22: -2304672727128620705
+      tileset-sliced_37: -2705965462299797424
+      tileset-sliced_13: -8784487641343689580
+      tileset-sliced_47: 5377579401652241825
+      tileset-sliced_29: 6441094262660707957
+      tileset-sliced_5: 8187979096719078458
+      tileset-sliced_33: 6642295835797722845
+      tileset-sliced_31: -5774405334793930303
+      tileset-sliced_12: 8867161112231138238
+      tileset-sliced_18: -4603852178612683570
+      tileset-sliced_9: 4973835992339445236
+      tileset-sliced_8: -1085757764421800911
+      tileset-sliced_23: 4447391927100505344
+      tileset-sliced_30: -3058506490785018268
+      tileset-sliced_27: 8460005599496329479
+      tileset-sliced_39: 4139817615643025436
+      tileset-sliced_21: -850241531969959492
+      tileset-sliced_26: 2424661989531479048
+      tileset-sliced_36: 7953928647319060498
+      tileset-sliced_0: 8020792422996973119
+      tileset-sliced_43: 4116619017300698554
+      tileset-sliced_17: 9165148420479917735
+      tileset-sliced_42: 1045128459966263314
+      tileset-sliced_41: 3596298000867399806
+      tileset-sliced_46: 4257369742982959978
+      tileset-sliced_34: 7950090198149811095
+      tileset-sliced_19: 5265570729163935484
+      tileset-sliced_14: -5828040857380144616
+      tileset-sliced_4: -5232436616217831087
+      tileset-sliced_15: 5512922540846680189
+      tileset-sliced_1: 7622575126782243504
+      tileset-sliced_25: 2579539874063866950
+      tileset-sliced_32: 6864542464105368374
+      tileset-sliced_45: -8930052257991932378
+      tileset-sliced_28: 4183624679388102006
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -2110,7 +2110,7 @@ CompositeCollider2D:
   m_GameObject: {fileID: 840764204}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7a0bdb9aae302124e91ae115e01e9a69, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -2527,7 +2527,6 @@ MonoBehaviour:
   rb: {fileID: 0}
   speed: 7
   jumpForce: 12
-  slideSpeed: 1
   wallJumpLerp: 5
   dashSpeed: 5
   canMove: 1
@@ -2615,14 +2614,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   onGround: 0
-  onWall: 0
-  onRightWall: 0
-  onLeftWall: 0
-  wallSide: 0
   collisionRadius: 0.1
   bottomOffset: {x: 0, y: -0.49}
-  rightOffset: {x: -0.29, y: -0.09}
-  leftOffset: {x: 0.29, y: -0.09}
 --- !u!114 &871739165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3135,7 +3128,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1352484228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.34, y: 4.63, z: 0}
+  m_LocalPosition: {x: -5.36, y: 4.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1434370687}

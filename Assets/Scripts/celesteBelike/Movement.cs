@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
-//using DG.Tweening;
 using UnityEngine.InputSystem;
 
 [RequireComponent (typeof(Collision))]
@@ -18,18 +15,15 @@ public class Movement : MonoBehaviour
 
     [Space]
     [Header("Stats")]
-    public float speed = 7;
-    public float jumpForce = 12;
-    public float slideSpeed = 1;
-    public float wallJumpLerp = 5;
-    public float dashSpeed = 40;
+    public float speed;
+    public float jumpForce;
+    public float wallJumpLerp;
+    public float dashSpeed;
 
     [Space]
     [Header("Booleans")]
     public bool canMove=true;
-    //public bool wallGrab;
     public bool wallJumped;
-    //public bool wallSlide;
     public bool isDashing;
 
 
@@ -57,6 +51,7 @@ public class Movement : MonoBehaviour
         if (ctx.performed)
         {
             isJumping = true;
+           // isJumpingCd();
         }
 
         if (ctx.canceled)
@@ -98,8 +93,10 @@ public class Movement : MonoBehaviour
 
         if ( onDashClick  && !hasDashed)
         {
-            if(DirRaw.x != 0 || DirRaw.y != 0)
+            Debug.Log(onDashClick);
+            if(DirRaw.x != 0 || DirRaw.y != 0) 
                 Dash(DirRaw.x, DirRaw.y);
+            Debug.Log(onDashClick);
         }
 
         if (coll.onGround && !groundTouch)
@@ -132,9 +129,6 @@ public class Movement : MonoBehaviour
         hasDashed = false;
         isDashing = false;
 
-       // side = anim.sr.flipX ? -1 : 1;
-
-        //jumpParticle.Play();
     }
 
     private void Dash(float x, float y)
@@ -171,6 +165,11 @@ public class Movement : MonoBehaviour
         if (coll.onGround)
             hasDashed = false;
     }
+    IEnumerator isJumpingCd()
+    {
+        isJumping = false;
+        yield return new WaitForSeconds(.15f);
+    }
 
     
     
@@ -202,11 +201,7 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(time);
         canMove = true;
     }
-
-    void RigidbodyDrag(float x)
-    {
-        rb.drag = x;
-    }
+    
 
     
 }

@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections;
 using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
@@ -13,19 +10,23 @@ public class EnemyBullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
     void Start()
     {
         rb.velocity = new Vector2(Speed,rb.velocity.y);
         StartCoroutine(Destroy());
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col != null)
+        if (col.gameObject.CompareTag("Ground"))
         {
-            
+            Destroy(gameObject);
+        }
+        if(col.gameObject.CompareTag("Player"))
+        {
+            HitBullet.instance.HitBulletSoldier();
+            Debug.Log("yes");
+            Destroy(gameObject);
         }
     }
 

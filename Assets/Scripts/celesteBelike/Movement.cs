@@ -32,6 +32,7 @@ public class Movement : MonoBehaviour
     private bool isJumping;
     private bool groundTouch;
     private bool hasDashed;
+    
 
     void Start()
     {
@@ -51,7 +52,6 @@ public class Movement : MonoBehaviour
         if (ctx.performed)
         {
             isJumping = true;
-           // isJumpingCd();
         }
 
         if (ctx.canceled)
@@ -86,17 +86,15 @@ public class Movement : MonoBehaviour
         if (isJumping)
         {
             if (coll.onGround)
-                Jump(Vector2.up, false);
+                Jump(Vector2.up);
             
                 
         }
 
         if ( onDashClick  && !hasDashed)
         {
-            Debug.Log(onDashClick);
             if(DirRaw.x != 0 || DirRaw.y != 0) 
                 Dash(DirRaw.x, DirRaw.y);
-            Debug.Log(onDashClick);
         }
 
         if (coll.onGround && !groundTouch)
@@ -134,7 +132,6 @@ public class Movement : MonoBehaviour
     private void Dash(float x, float y)
     {
         FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
-
         hasDashed = true;
         rb.velocity = Vector2.zero;
         Vector2 dir = new Vector2(x, y);
@@ -165,11 +162,7 @@ public class Movement : MonoBehaviour
         if (coll.onGround)
             hasDashed = false;
     }
-    IEnumerator isJumpingCd()
-    {
-        isJumping = false;
-        yield return new WaitForSeconds(.15f);
-    }
+    
 
     
     
@@ -189,7 +182,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void Jump(Vector2 dir, bool wall)
+    private void Jump(Vector2 dir)
     {
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.velocity += dir * jumpForce;
@@ -201,6 +194,13 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(time);
         canMove = true;
     }
+    IEnumerator isJumpingCd(float time)
+    {
+        yield return new WaitForSeconds(time);
+        onDashClick = false;
+
+    }
+    
     
 
     

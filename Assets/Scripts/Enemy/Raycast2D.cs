@@ -55,7 +55,7 @@ public class Raycast2D : MonoBehaviour
     }
     void RaycastLeft()
     {
-        Debug.Log(RotaAngle);
+      
         var RotationXRaycast = Mathf.Sin(Mathf.Deg2Rad * RotaAngle) * 10;
         var RotationYRaycast = Mathf.Cos(Mathf.Deg2Rad * RotaAngle) * 10;
         MoveRaycast = new Vector2(RotationXRaycast, RotationYRaycast);

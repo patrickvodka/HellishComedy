@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class SoldierBulletUp : MonoBehaviour
 {
     [Space]
     public float Speed;
@@ -12,7 +12,7 @@ public class EnemyBullet : MonoBehaviour
     }
     void Start()
     {
-        rb.velocity = new Vector2(Speed,rb.velocity.y);
+        rb.velocity = new Vector2(rb.velocity.x,Speed);
         StartCoroutine(Destroy());
     }
 
@@ -24,7 +24,7 @@ public class EnemyBullet : MonoBehaviour
         }
         if(col.gameObject.CompareTag("Player"))
         {
-            HitBullet.instance.HitBulletSoldier();
+            HitBullet.instance.HitBulletSoldierUpDown();
             Debug.Log("yes");
             Destroy(gameObject);
         }

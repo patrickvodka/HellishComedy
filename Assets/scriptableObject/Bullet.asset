@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyBullet:
   - {fileID: 2017632011286000120, guid: 3d188bdcdb8aa3f40b5dd3ddb3a7f7c9, type: 3}
+  - {fileID: 2017632011286000120, guid: a3a53d95c0101f64da385c26e950ea5a, type: 3}
+  - {fileID: 2017632011286000120, guid: cb1432476fb293f4aba558961c8b1afc, type: 3}
+  - {fileID: 2017632011286000120, guid: 063173427fb2eca47bdd5cf046331c6e, type: 3}

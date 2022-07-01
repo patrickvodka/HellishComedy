@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private bool AttackOn;
+    private Movement movement;
     private GameObject attackRight;
     private GameObject attackLeft;
-    private Transform Player;
+    
     private bool Left;
+    private bool AttackClick;
     private void Awake()
     {
-        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        movement = GetComponent<Movement>();
         attackRight = transform.Find("AttackRight").gameObject;
         attackLeft = transform.Find("AttackLeft").gameObject;
     }
@@ -21,43 +22,47 @@ public class PlayerAttack : MonoBehaviour
     {
         if (ctx.performed)
         { 
-            AttackOn = true;
+            AttackClick = true;
         }
         if(ctx.canceled) 
-            AttackOn = false;
+            AttackClick = false;
     }
 
     private void Update()
     {
+        var AnimTime = .2f;
         CheckLR();
-        if (AttackOn && !Left)
+        if (AttackClick && !Left)
         {
             attackRight.SetActive(true);
-            StartCoroutine(AttackCd());
+            StopGravity(AnimTime);
+            StartCoroutine(AttackCd(AnimTime));
         }
 
-        if (AttackOn && Left)
+        if (AttackClick && Left)
         {
             attackLeft.SetActive(true);
-            StartCoroutine(AttackCd());
+            StopGravity(AnimTime);
+            StartCoroutine(AttackCd(AnimTime));
         }
     }
 
     private void CheckLR()
     {
-        if (Player.eulerAngles ==new Vector3(0, 0, 0))
-        {
-           Left = false;
-        }
-        else
-        {
-            Left = true;
-        }
+        var check = gameObject.transform.eulerAngles == new Vector3(0, 0, 0) ? Left = false : Left = true;
     }
 
-    IEnumerator AttackCd()
+    private void StopGravity(float x)
     {
-        yield return new WaitForSeconds(.2f);
+        movement.canMove = false;
+        movement.canJump = false;
+        movement.rb.velocity = new Vector2(0, 0);
+        movement.rb.gravityScale = 0;
+    }
+
+    IEnumerator AttackCd(float x)
+    {
+        yield return new WaitForSeconds(x);
         if (attackRight)
         {
             attackRight.SetActive(false);
@@ -66,5 +71,8 @@ public class PlayerAttack : MonoBehaviour
         {
             attackLeft.SetActive(false);
         }
+        movement.canMove = true;
+        movement.canJump = true;
+        movement.rb.gravityScale = 3;
     }
 }

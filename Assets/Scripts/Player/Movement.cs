@@ -23,8 +23,10 @@ public class Movement : MonoBehaviour
     [Space]
     [Header("Booleans")]
     public bool canMove=true;
+    public bool canJump;
     public bool wallJumped;
     public bool isDashing;
+    public bool HasADash;
 
 
     [Space] 
@@ -83,7 +85,7 @@ public class Movement : MonoBehaviour
             GetComponent<BetterJumping>().enabled = true;
         }
 
-        if (isJumping)
+        if (isJumping&&canJump)
         {
             if (coll.onGround)
                 Jump(Vector2.up);
@@ -91,10 +93,13 @@ public class Movement : MonoBehaviour
                 
         }
 
-        if ( onDashClick  && !hasDashed)
+        if ( onDashClick  && !hasDashed && HasADash &&!groundTouch)
         {
-            if(DirRaw.x != 0 || DirRaw.y != 0) 
+            if (DirRaw.x != 0 || DirRaw.y != 0)
+            {
                 Dash(DirRaw.x, DirRaw.y);
+                HasADash = false;
+            }
         }
 
         if (coll.onGround && !groundTouch)

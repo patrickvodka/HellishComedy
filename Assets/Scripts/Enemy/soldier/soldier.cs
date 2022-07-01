@@ -10,7 +10,7 @@ public class soldier : MonoBehaviour
     [Header("Munition utilisé")]
     public Bullet _bullet;
     [Space]
-    [Header("Vers la où il tire")]
+    [Header("Vers la où il tire,1 Direction")]
     public bool Up;
     public bool Down;
     public bool Left;
@@ -45,6 +45,10 @@ public class soldier : MonoBehaviour
 
     private void Start()
     {
+      //  SpawnBulletRight.transform.rotation = quaternion.Euler(0f, 0f, 0f);
+       // SpawnBulletLeft.transform.rotation = quaternion.Euler(0f, 0f, 0f);
+       // SpawnBulletUp.transform.rotation = quaternion.Euler(0f, 0f, 0f);
+      //  SpawnBulletDown.transform.rotation = quaternion.Euler(0f, 0f, 0f);
         if (Up)
         {
             transformGun = SpawnBulletUp;
@@ -70,6 +74,7 @@ public class soldier : MonoBehaviour
         {
             Debug.Log("Seule 1 peut etre actif! ");
         }
+        transformGun.rotation=quaternion.Euler(0,0,0);
     }
 
 
@@ -83,7 +88,7 @@ public class soldier : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(BulletChoose, transformGun.position,quaternion.identity);
+        Instantiate(BulletChoose, transformGun.position,quaternion.Euler(0,0,0));
     }
     private IEnumerator ShootRoutine()
     {

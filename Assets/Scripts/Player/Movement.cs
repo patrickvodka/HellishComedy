@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
 
 [RequireComponent (typeof(Collision))]
@@ -27,6 +28,8 @@ public class Movement : MonoBehaviour
     public bool wallJumped;
     public bool isDashing;
     public bool HasADash;
+    public bool GhostTrail=false;
+    public bool JumpBool=false;
 
 
     [Space] 
@@ -88,15 +91,20 @@ public class Movement : MonoBehaviour
         if (isJumping&&canJump)
         {
             if (coll.onGround)
+            {
+                JumpBool = true;
+                GhostTrail=true;
                 Jump(Vector2.up);
-            
-                
+            }
+
+
         }
 
         if ( onDashClick  && !hasDashed && HasADash &&!groundTouch)
         {
             if (DirRaw.x != 0 || DirRaw.y != 0)
             {
+                GhostTrail=true;
                 Dash(DirRaw.x, DirRaw.y);
                 HasADash = false;
             }
@@ -106,6 +114,7 @@ public class Movement : MonoBehaviour
         {
             GroundTouch();
             groundTouch = true;
+            GhostTrail = false;
         }
 
         if(!coll.onGround && groundTouch)

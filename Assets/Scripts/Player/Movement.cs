@@ -12,24 +12,23 @@ public class Movement : MonoBehaviour
     private Vector2 DirRaw;
     [HideInInspector]
     public Rigidbody2D rb;
+    public bool GhostTrail=false;
+    public bool maxJumpBool=false;
     
 
     [Space]
     [Header("Stats")]
     public float speed;
     public float jumpForce;
-    public float wallJumpLerp;
     public float dashSpeed;
 
     [Space]
     [Header("Booleans")]
     public bool canMove=true;
     public bool canJump;
-    public bool wallJumped;
     public bool isDashing;
     public bool HasADash;
-    public bool GhostTrail=false;
-    public bool JumpBool=false;
+    
 
 
     [Space] 
@@ -37,6 +36,7 @@ public class Movement : MonoBehaviour
     private bool isJumping;
     private bool groundTouch;
     private bool hasDashed;
+    
     
 
     void Start()
@@ -84,7 +84,6 @@ public class Movement : MonoBehaviour
 
         if (coll.onGround && !isDashing)
         {
-            wallJumped = false;
             GetComponent<BetterJumping>().enabled = true;
         }
 
@@ -92,7 +91,6 @@ public class Movement : MonoBehaviour
         {
             if (coll.onGround)
             {
-                JumpBool = true;
                 GhostTrail=true;
                 Jump(Vector2.up);
             }
@@ -113,8 +111,6 @@ public class Movement : MonoBehaviour
         if (coll.onGround && !groundTouch)
         {
             GroundTouch();
-            groundTouch = true;
-            GhostTrail = false;
         }
 
         if(!coll.onGround && groundTouch)
@@ -140,6 +136,9 @@ public class Movement : MonoBehaviour
     {
         hasDashed = false;
         isDashing = false;
+        HasADash = true;
+        groundTouch = true;
+        GhostTrail = false;
 
     }
 
@@ -159,14 +158,12 @@ public class Movement : MonoBehaviour
         StartCoroutine(GroundDash());
         rb.gravityScale = 0;
         GetComponent<BetterJumping>().enabled = false;
-        wallJumped = true;
         isDashing = true;
         
         yield return new WaitForSeconds(.3f);
         
         rb.gravityScale = 3;
         GetComponent<BetterJumping>().enabled = true;
-        wallJumped = false;
         isDashing = false;
     }
 
@@ -178,26 +175,21 @@ public class Movement : MonoBehaviour
     }
     
 
-    
-    
-
     private void Walk(Vector2 dir)
     {
         if (!canMove)
             return;
 
-        if (!wallJumped)
+        else
         {
             rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
         }
-        else
-        {
-            rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * speed, rb.velocity.y)), wallJumpLerp * Time.deltaTime);
-        }
+        
     }
 
     private void Jump(Vector2 dir)
     {
+        maxJumpBool = true;
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.velocity += dir * jumpForce;
     }
@@ -208,14 +200,4 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(time);
         canMove = true;
     }
-    IEnumerator isJumpingCd(float time)
-    {
-        yield return new WaitForSeconds(time);
-        onDashClick = false;
-
-    }
-    
-    
-
-    
 }

@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using Unity.Mathematics;
+using UnityEditor;
 
 public class GhostTrail : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class GhostTrail : MonoBehaviour
     private GameObject ghostStacks;
     private bool canSpawn=true;
     public bool destroyAllCopy;
+    public bool invisibleGhost;
 
     private void Awake()
     {
@@ -20,6 +23,19 @@ public class GhostTrail : MonoBehaviour
 
     public void Update()
     {
+        if (invisibleGhost)
+        {
+            foreach (Transform child in ghostStacks.transform) {
+                child.gameObject.SetActive(false);
+            } 
+            
+        }
+        else
+        {
+            foreach (Transform child in ghostStacks.transform) {
+                child.gameObject.SetActive(true);
+            } 
+        }
         if (destroyAllCopy)
         {
             foreach (Transform child in ghostStacks.transform) {

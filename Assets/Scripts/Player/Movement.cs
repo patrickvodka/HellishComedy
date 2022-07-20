@@ -12,9 +12,10 @@ public class Movement : MonoBehaviour
     private Vector2 DirRaw;
     [HideInInspector]
     public Rigidbody2D rb;
-    public bool GhostTrail=false;
-    public bool maxJumpBool=false;
-    
+    [HideInInspector]
+    public bool GhostTrail=false,maxJumpBool=false,isJumping;
+
+
 
     [Space]
     [Header("Stats")]
@@ -28,19 +29,19 @@ public class Movement : MonoBehaviour
     public bool canJump;
     public bool isDashing;
     public bool HasADash;
-    
 
 
-    [Space] 
+
+    [Space] private SpriteRenderer sR;
     private bool onDashClick;
-    private bool isJumping;
     private bool groundTouch;
     private bool hasDashed;
     
     
 
-    void Start()
+    void Awake()
     {
+        sR = GetComponent<SpriteRenderer>();
         coll = GetComponent<Collision>();
         rb = GetComponent<Rigidbody2D>();
         
@@ -120,12 +121,12 @@ public class Movement : MonoBehaviour
         
         if(Dir.x > 0)
         {
-            transform.eulerAngles = new Vector3(0,0,0);
+            sR.flipX=false;
             
         }
         if (Dir.x < 0)
         {
-            transform.eulerAngles = new Vector3(0,180,0);
+            sR.flipX=true;
             
         }
 

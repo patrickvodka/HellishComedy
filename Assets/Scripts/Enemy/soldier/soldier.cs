@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
 using Unity.Mathematics;
-using UnityEditor;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class soldier : MonoBehaviour
@@ -20,6 +17,7 @@ public class soldier : MonoBehaviour
     private Transform SpawnBulletDown;
     private Transform SpawnBulletLeft;
     private Transform SpawnBulletRight;
+    private Transform SoldierSr;
     
     private GameObject BulletRight;
     private GameObject BulletLeft;
@@ -32,7 +30,8 @@ public class soldier : MonoBehaviour
     
    
    private void Awake()
-    {
+   {
+       SoldierSr = transform.Find("SoldierS.R");
         SpawnBulletUp = transform.Find("SpawnBulletUp");
         SpawnBulletDown = transform.Find("SpawnBulletDown");
         SpawnBulletLeft = transform.Find("SpawnBulletLeft");
@@ -45,27 +44,27 @@ public class soldier : MonoBehaviour
 
     private void Start()
     {
-      //  SpawnBulletRight.transform.rotation = quaternion.Euler(0f, 0f, 0f);
-       // SpawnBulletLeft.transform.rotation = quaternion.Euler(0f, 0f, 0f);
-       // SpawnBulletUp.transform.rotation = quaternion.Euler(0f, 0f, 0f);
-      //  SpawnBulletDown.transform.rotation = quaternion.Euler(0f, 0f, 0f);
         if (Up)
         {
+            SoldierSr.transform.eulerAngles = new Vector3(0, 0, 0);
             transformGun = SpawnBulletUp;
             BulletChoose = BulletUp;
         }
         if (Down)
         {
+            SoldierSr.transform.eulerAngles = new Vector3(0, 0,180);
             transformGun = SpawnBulletDown;
             BulletChoose = BulletDown;
         }
         if (Right)
         {
+            SoldierSr.transform.eulerAngles = new Vector3(0, 0,-90);
             transformGun = SpawnBulletRight;
             BulletChoose = BulletRight;
         }
         if(Left)
         {
+            SoldierSr.transform.eulerAngles = new Vector3(0, 0,90);
             transformGun = SpawnBulletLeft;
             BulletChoose = BulletLeft;
         }
@@ -74,6 +73,7 @@ public class soldier : MonoBehaviour
         {
             Debug.Log("Seule 1 peut etre actif! ");
         }
+        Debug.Log(SoldierSr.transform.rotation.eulerAngles);
         transformGun.rotation=quaternion.Euler(0,0,0);
     }
 

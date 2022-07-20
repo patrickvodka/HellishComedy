@@ -8,6 +8,9 @@ TagManager:
   - Ground
   - FallenStacks
   - HeadStacks
+  - PlayerAttack
+  - Soldier
+  - GameManager
   layers:
   - Default
   - TransparentFX

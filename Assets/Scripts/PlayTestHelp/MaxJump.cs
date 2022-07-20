@@ -5,7 +5,6 @@ using Unity.Mathematics;
 public class MaxJump : MonoBehaviour
 {
     private Movement move;
-    private bool canSpawn=true;
     
     [Header("blanc=Saut max")]
     public GameObject headWhite;
@@ -41,15 +40,15 @@ public class MaxJump : MonoBehaviour
         }
         else
         {
-            foreach (Transform child in headStacks.transform) {
+            foreach (Transform child in headStacks.transform) 
                 child.gameObject.SetActive(true);
-            } 
+            
         }
         if (destroyAllCopy)
         {
-            foreach (Transform child in headStacks.transform) {
-                GameObject.Destroy(child.gameObject);
-            }
+            foreach (Transform child in headStacks.transform) 
+                Destroy(child.gameObject);
+            
         }
 
         if (!waitingSys)

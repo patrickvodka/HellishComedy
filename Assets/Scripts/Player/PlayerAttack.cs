@@ -5,14 +5,17 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public float  animTime;
     private Movement movement;
     private GameObject attackRight;
     private GameObject attackLeft;
+    private SpriteRenderer sR;
     
     private bool Left;
     private bool AttackClick;
     private void Awake()
     {
+        sR = GetComponent<SpriteRenderer>();
         movement = GetComponent<Movement>();
         attackRight = transform.Find("AttackRight").gameObject;
         attackLeft = transform.Find("AttackLeft").gameObject;
@@ -30,26 +33,25 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        var AnimTime = .2f;
         CheckLR();
         if (AttackClick && !Left)
         {
             attackRight.SetActive(true);
-            StopGravity(AnimTime);
-            StartCoroutine(AttackCd(AnimTime));
+            StopGravity(animTime);
+            StartCoroutine(AttackCd(animTime));
         }
 
         if (AttackClick && Left)
         {
             attackLeft.SetActive(true);
-            StopGravity(AnimTime);
-            StartCoroutine(AttackCd(AnimTime));
+            StopGravity(animTime);
+            StartCoroutine(AttackCd(animTime));
         }
     }
 
     private void CheckLR()
     {
-        var check = gameObject.transform.eulerAngles == new Vector3(0, 0, 0) ? Left = false : Left = true;
+        var check = sR.flipX ? Left = true : Left = false;
     }
 
     private void StopGravity(float x)

@@ -16,7 +16,6 @@ public class SoldierColl : MonoBehaviour
 
     private void OnCollisionEnter2D (Collision2D coll2D)
     { 
-        Debug.Log("hit");
         if (coll2D.gameObject.CompareTag("Player"))
         {
             HitBullet.instance.HitBulletSoldierUpDown();
@@ -26,7 +25,6 @@ public class SoldierColl : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collStay2D)
     {
-        Debug.Log("hitlong");
         if (collStay2D.gameObject.CompareTag("Player"))
         {
             HitBullet.instance.HitBulletSoldierUpDown();

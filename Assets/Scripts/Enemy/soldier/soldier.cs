@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.Serialization;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class soldier : MonoBehaviour
     public bool Left;
     public bool Right;
     
+    private AudioSource audioS;
     private Transform SpawnBulletUp;
     private Transform SpawnBulletDown;
     private Transform SpawnBulletLeft;
@@ -40,7 +42,8 @@ public class soldier : MonoBehaviour
         BulletLeft = _bullet.EnemyBullet[1];
         BulletUp = _bullet.EnemyBullet[2];
         BulletDown = _bullet.EnemyBullet[3];
-    }
+        audioS = transform.GetComponent<AudioSource>();
+   }
 
     private void Start()
     {
@@ -87,6 +90,7 @@ public class soldier : MonoBehaviour
 
     void Shoot()
     {
+        audioS.Play(0);
         Instantiate(BulletChoose, transformGun.position,quaternion.Euler(0,0,0));
     }
     private IEnumerator ShootRoutine()

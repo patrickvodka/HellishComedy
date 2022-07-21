@@ -22,6 +22,7 @@ public class Movement : MonoBehaviour
     public float speed;
     public float jumpForce;
     public float dashSpeed;
+    public float TimeDash;
 
     [Space]
     [Header("Booleans")]
@@ -161,7 +162,7 @@ public class Movement : MonoBehaviour
         GetComponent<BetterJumping>().enabled = false;
         isDashing = true;
         
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(TimeDash);
         
         rb.gravityScale = 3;
         GetComponent<BetterJumping>().enabled = true;

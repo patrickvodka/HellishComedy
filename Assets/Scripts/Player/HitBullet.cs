@@ -49,6 +49,7 @@ public class HitBullet : MonoBehaviour
         }
         if (HitUpDown)
         {
+            
             if (randomBool)
             {
                 randomBool = false;
@@ -66,6 +67,7 @@ public class HitBullet : MonoBehaviour
                 FallPlayer(-5);
             }
         }
+
         
     }
     public void HitBulletSoldierRight()

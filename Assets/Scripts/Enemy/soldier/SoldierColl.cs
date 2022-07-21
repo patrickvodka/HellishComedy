@@ -1,39 +1,35 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+using System.ComponentModel.Design.Serialization;
 using UnityEngine;
 
 public class SoldierColl : MonoBehaviour
 {
+    private HitBullet _hitBullet;
     private Movement movement;
-    private SoldierRespawn SoldierResp;
     private void Awake()
     {
-        SoldierResp = transform.parent.GetComponent<SoldierRespawn>();
+        _hitBullet = GameObject.FindWithTag("Player").GetComponent<HitBullet>();
         movement = GameObject.FindWithTag("Player").GetComponent<Movement>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 
     private void OnCollisionEnter2D (Collision2D coll2D)
     { 
-        Debug.Log("Hit");
-        if (coll2D.gameObject.CompareTag("PlayerAttack"))
-        {
-            Debug.Log('e');
-            SoldierResp.soldierDied = true;
-            movement.HasADash = true;
-            transform.gameObject.SetActive(false);
-        }
-
+        Debug.Log("hit");
         if (coll2D.gameObject.CompareTag("Player"))
         {
-           Debug.Log("player"); 
+            HitBullet.instance.HitBulletSoldierUpDown();
+        }
+
+    }
+
+    private void OnCollisionStay2D(Collision2D collStay2D)
+    {
+        Debug.Log("hitlong");
+        if (collStay2D.gameObject.CompareTag("Player"))
+        {
+            HitBullet.instance.HitBulletSoldierUpDown();
         }
     }
 }

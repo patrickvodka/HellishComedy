@@ -73,7 +73,6 @@ public class soldier : MonoBehaviour
         {
             Debug.Log("Seule 1 peut etre actif! ");
         }
-        Debug.Log(SoldierSr.transform.rotation.eulerAngles);
         transformGun.rotation=quaternion.Euler(0,0,0);
     }
 

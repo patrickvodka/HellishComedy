@@ -21,6 +21,7 @@ public class AttackColl : MonoBehaviour
             clone.SetActive(false);
             Instantiate(clone, clone.transform.position, Quaternion.identity,soldierResp.transform);
             soldierResp.soldierDied = true;
+            movement.isDashing = false;
             movement.HasADash = true;
             Destroy(clone);
         }

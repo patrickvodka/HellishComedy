@@ -6,11 +6,13 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public float  animTime;
+    public float attackCd;
     private Movement movement;
     private GameObject attackRight;
     private GameObject attackLeft;
     private SpriteRenderer sR;
-    
+
+    private bool canAttack=true;
     private bool Left;
     private bool AttackClick;
     private void Awake()
@@ -34,18 +36,22 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         CheckLR();
-        if (AttackClick && !Left)
+        if (AttackClick && !Left&& canAttack)
         {
+            canAttack = false;
+            StartCoroutine(AttackCd(attackCd));
             attackRight.SetActive(true);
             StopGravity(animTime);
-            StartCoroutine(AttackCd(animTime));
+            StartCoroutine(AttackAnimTime(animTime));
         }
 
-        if (AttackClick && Left)
+        if (AttackClick && Left && canAttack)
         {
+            canAttack = false;
+            StartCoroutine(AttackCd(attackCd));
             attackLeft.SetActive(true);
             StopGravity(animTime);
-            StartCoroutine(AttackCd(animTime));
+            StartCoroutine(AttackAnimTime(animTime));
         }
     }
 
@@ -62,7 +68,7 @@ public class PlayerAttack : MonoBehaviour
         movement.rb.gravityScale = 0;
     }
 
-    IEnumerator AttackCd(float x)
+    IEnumerator AttackAnimTime(float x)
     {
         yield return new WaitForSeconds(x);
         if (attackRight)
@@ -76,5 +82,12 @@ public class PlayerAttack : MonoBehaviour
         movement.canMove = true;
         movement.canJump = true;
         movement.rb.gravityScale = 3;
+    }
+
+    private IEnumerator AttackCd(float x)
+    {
+        yield return new WaitForSeconds(x);
+        canAttack = true;
+
     }
 }

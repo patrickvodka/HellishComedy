@@ -161,11 +161,12 @@ public class Movement : MonoBehaviour
         GetComponent<BetterJumping>().enabled = false;
         isDashing = true;
         
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.1f);
         
         rb.gravityScale = 3;
         GetComponent<BetterJumping>().enabled = true;
         isDashing = false;
+        hasDashed = false;
     }
 
     IEnumerator GroundDash()

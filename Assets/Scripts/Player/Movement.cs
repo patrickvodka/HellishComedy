@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
     public Rigidbody2D rb;
     [HideInInspector]
     public bool GhostTrail=false,maxJumpBool=false,isJumping;
-
+    //<>
 
 
     [Space]
@@ -23,6 +23,8 @@ public class Movement : MonoBehaviour
     public float jumpForce;
     public float dashSpeed;
     public float TimeDash;
+    public float coyoteTime;
+    private float coyoteTimeCounter;
 
     [Space]
     [Header("Booleans")]
@@ -63,6 +65,7 @@ public class Movement : MonoBehaviour
 
         if (ctx.canceled)
         {
+            coyoteTimeCounter = 0f;
             isJumping = false;
         }
     }
@@ -89,15 +92,18 @@ public class Movement : MonoBehaviour
             GetComponent<BetterJumping>().enabled = true;
         }
 
-        if (isJumping&&canJump)
+        if (coll.onGround)
         {
-            if (coll.onGround)
-            {
-                GhostTrail=true;
-                Jump(Vector2.up);
-            }
-
-
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+        if (isJumping&&canJump&& coyoteTimeCounter>0)
+        {
+            GhostTrail=true;
+            Jump(Vector2.up);
         }
 
         if ( onDashClick  && !hasDashed && HasADash &&!groundTouch)

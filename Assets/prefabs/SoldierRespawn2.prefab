@@ -179,7 +179,7 @@ MonoBehaviour:
   Down: 0
   Left: 1
   Right: 0
-  BlueSoldier: 0
+  BlueSoldier: 1
   shootTimeRed: 2
   shootTimeBlue: 1.5
 --- !u!82 &8008226814938225583
@@ -354,7 +354,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bb0aa9df40cfc9b48b05f72f23a43070, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.225873, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 8580621771767333207}
   - component: {fileID: 4160404531403431988}
   m_Layer: 0
-  m_Name: SoldierRespawn
+  m_Name: SoldierRespawn2
   m_TagString: Soldier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

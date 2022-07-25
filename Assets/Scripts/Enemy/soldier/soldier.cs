@@ -13,6 +13,11 @@ public class soldier : MonoBehaviour
     public bool Down;
     public bool Left;
     public bool Right;
+    [Header("Laisser actif Pour les Soldats Bleu")]
+    public bool BlueSoldier;
+    public float shootTimeRed;
+    public float shootTimeBlue;
+    private float shootTime;
     
     private AudioSource audioS;
     private Transform SpawnBulletUp;
@@ -47,7 +52,9 @@ public class soldier : MonoBehaviour
 
     private void Start()
     {
-        if (Up)
+       var time =BlueSoldier ? shootTime=shootTimeBlue : shootTime=shootTimeRed;
+       
+       if (Up)
         {
             SoldierSr.transform.eulerAngles = new Vector3(0, 0, 0);
             transformGun = SpawnBulletUp;
@@ -96,7 +103,7 @@ public class soldier : MonoBehaviour
     private IEnumerator ShootRoutine()
     {
         canShoot = false;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(shootTime);
         Shoot();
         canShoot = true;
 

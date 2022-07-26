@@ -7,6 +7,7 @@ public class HitBullet : MonoBehaviour
 {
     //><
     private Rigidbody2D rb;
+    private SpriteRenderer Sr;
     public static HitBullet instance;
     
     private GameObject BulletRight;
@@ -26,6 +27,7 @@ public class HitBullet : MonoBehaviour
 
     private void Awake()
     {
+        Sr=GetComponent<SpriteRenderer>();
         movement = GetComponent<Movement>();
         rb = GetComponent<Rigidbody2D>();
         instance = this;
@@ -90,8 +92,14 @@ public class HitBullet : MonoBehaviour
     {
         if (StartTime < EndTime)
         {
+            Sr.enabled=false;
             rb.velocity = new Vector2(x*1.5f, rb.velocity.y);
             rb.gravityScale = 5;
+            var moduloTwo = StartTime % 2;
+            if (moduloTwo!=0)
+            {
+                Sr.enabled=true;  
+            }
             StartTime++;
         }
         else

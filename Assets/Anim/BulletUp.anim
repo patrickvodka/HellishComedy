@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BulletSoldier
+  m_Name: BulletUp
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: f7420168077f9ff43b0bf403cc8df4d8, type: 3}
+      value: {fileID: 21300000, guid: bc7654f733554c744a2703b30970abac, type: 3}
+    - time: 0.33333334
+      value: {fileID: 21300000, guid: 748561a9f51b1fc4abfb05d87fb38d9f, type: 3}
+    - time: 0.6666667
+      value: {fileID: 21300000, guid: 229b42aab3783aa4190e8a36fe36f882, type: 3}
+    - time: 1
+      value: {fileID: 21300000, guid: e97b21559fd23874db5c9a77e63c4da5, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -40,13 +46,16 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: f7420168077f9ff43b0bf403cc8df4d8, type: 3}
+    - {fileID: 21300000, guid: bc7654f733554c744a2703b30970abac, type: 3}
+    - {fileID: 21300000, guid: 748561a9f51b1fc4abfb05d87fb38d9f, type: 3}
+    - {fileID: 21300000, guid: 229b42aab3783aa4190e8a36fe36f882, type: 3}
+    - {fileID: 21300000, guid: e97b21559fd23874db5c9a77e63c4da5, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.016666668
+    m_StopTime: 1.0166667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

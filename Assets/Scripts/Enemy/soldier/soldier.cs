@@ -98,7 +98,7 @@ public class soldier : MonoBehaviour
     void Shoot()
     {
         audioS.Play(0);
-        Instantiate(BulletChoose, transformGun.position,quaternion.Euler(0,0,0));
+        Instantiate(BulletChoose, transformGun.position, transform.GetChild(0).rotation);
     }
     private IEnumerator ShootRoutine()
     {

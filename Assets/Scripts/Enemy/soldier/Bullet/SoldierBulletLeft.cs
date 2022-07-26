@@ -25,7 +25,6 @@ public class SoldierBulletLeft : MonoBehaviour
         if(col.gameObject.CompareTag("Player"))
         {
             HitBullet.instance.HitBulletSoldierLeft();
-            Debug.Log("yes");
             Destroy(gameObject);
         }
     }

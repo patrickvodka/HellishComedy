@@ -18,7 +18,7 @@ public class AttackColl : MonoBehaviour
     {
         if (coll2D.gameObject.CompareTag("Soldier"))
         {
-            movement.rb.velocity += new Vector2(movement.rb.velocity.x, jumpForce);
+            movement.rb.velocity = new Vector2(movement.rb.velocity.x, jumpForce);
             clone = coll2D.gameObject.transform.parent.GetComponent<soldier>().gameObject;
             soldierResp = clone.transform.parent.GetComponent<SoldierRespawn>();
             clone.SetActive(false);

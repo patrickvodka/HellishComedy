@@ -64,8 +64,8 @@ public class PlayerAttack : MonoBehaviour
     {
         movement.canMove = false;
         movement.canJump = false;
-        movement.rb.velocity = new Vector2(0, 0);
-        movement.rb.gravityScale = 0;
+       // movement.rb.velocity = new Vector2(0, 0);
+       // movement.rb.gravityScale = 0;
     }
 
     IEnumerator AttackAnimTime(float x)

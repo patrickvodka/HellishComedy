@@ -171,16 +171,13 @@ public class Movement : MonoBehaviour
         var lineJump = new Vector2(0, 1);
         if (dir == lineJump)
         {
-            Debug.Log(TimeDash);
             rb.velocity = dir * (dashSpeed);
-            StartCoroutine(DashWait(TimeDash-0.09f));
-            Debug.Log(TimeDash-0.09f);
         }
         else
         {
             rb.velocity = dir * dashSpeed;
-            StartCoroutine(DashWait(TimeDash));
         }
+        StartCoroutine(DashWait(TimeDash));
     }
 
     IEnumerator DashWait(float time)
@@ -190,6 +187,7 @@ public class Movement : MonoBehaviour
         GetComponent<BetterJumping>().enabled = false;
         isDashing = true;
         yield return new WaitForSeconds(time);
+        rb.velocity = rb.velocity/=2;
         canMove = true;
         rb.gravityScale = 3;
         GetComponent<BetterJumping>().enabled = true;

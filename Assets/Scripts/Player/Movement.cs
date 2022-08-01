@@ -2,11 +2,13 @@
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 [RequireComponent (typeof(Collision))]
 [RequireComponent (typeof(BetterJumping))]
 public class Movement : MonoBehaviour
 {
+    
     private Collision coll;
     private Vector2 Dir;
     private Vector2 DirRaw;
@@ -25,6 +27,7 @@ public class Movement : MonoBehaviour
     public float TimeDash;
     public float coyoteTime;
     private float coyoteTimeCounter;
+    private float TimeDashLine;
 
     [Space]
     [Header("Booleans")]
@@ -35,10 +38,15 @@ public class Movement : MonoBehaviour
 
 
 
-    [Space] private SpriteRenderer sR;
+    [Space] 
+    private Animator anim;
+    private SpriteRenderer sR;
     private bool onDashClick;
     private bool groundTouch;
     private bool hasDashed;
+    [Space] 
+    public Sprite FallenWhite;
+    public Sprite FallenPurple;
     
     
 
@@ -47,7 +55,8 @@ public class Movement : MonoBehaviour
         sR = GetComponent<SpriteRenderer>();
         coll = GetComponent<Collision>();
         rb = GetComponent<Rigidbody2D>();
-        
+        anim = transform.GetComponent<Animator>();
+
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -86,6 +95,8 @@ public class Movement : MonoBehaviour
         Vector2 dir = new Vector2(Dir.x,Dir.y);
 
         Walk(dir);
+        var check = !HasADash ? sR.sprite = FallenPurple : sR.sprite = FallenWhite;
+        
 
         if (coll.onGround && !isDashing)
         {
@@ -154,22 +165,32 @@ public class Movement : MonoBehaviour
     {
         FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
         hasDashed = true;
+        canMove = false;
         rb.velocity = Vector2.zero;
-        Vector2 dir = new Vector2(x, y);
-
-        rb.velocity += dir.normalized * dashSpeed;
-        StartCoroutine(DashWait());
+        Vector2 dir = new Vector2(x, y).normalized;
+        var lineJump = new Vector2(0, 1);
+        if (dir == lineJump)
+        {
+            Debug.Log(TimeDash);
+            rb.velocity = dir * (dashSpeed);
+            StartCoroutine(DashWait(TimeDash-0.09f));
+            Debug.Log(TimeDash-0.09f);
+        }
+        else
+        {
+            rb.velocity = dir * dashSpeed;
+            StartCoroutine(DashWait(TimeDash));
+        }
     }
 
-    IEnumerator DashWait()
+    IEnumerator DashWait(float time)
     {
         StartCoroutine(GroundDash());
         rb.gravityScale = 0;
         GetComponent<BetterJumping>().enabled = false;
         isDashing = true;
-        
-        yield return new WaitForSeconds(TimeDash);
-        
+        yield return new WaitForSeconds(time);
+        canMove = true;
         rb.gravityScale = 3;
         GetComponent<BetterJumping>().enabled = true;
         isDashing = false;

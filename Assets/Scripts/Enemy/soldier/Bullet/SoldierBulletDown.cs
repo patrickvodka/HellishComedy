@@ -16,16 +16,20 @@ public class SoldierBulletDown : MonoBehaviour
         StartCoroutine(Destroy());
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
+        ContactPoint2D contact = col.contacts[0];
+        Vector2 numContact = contact.point;
+        Debug.Log(contact);
+        Debug.Log(numContact);
         if (col.gameObject.CompareTag("Ground"))
         {
             Destroy(gameObject);
         }
         if(col.gameObject.CompareTag("Player"))
         {
+            
             HitBullet.instance.HitBulletSoldierUpDown();
-            Debug.Log("yes");
             Destroy(gameObject);
         }
     }

@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     private GameObject attackRight;
     private GameObject attackLeft;
     private SpriteRenderer sR;
+    private Animator anim;
 
     private bool canAttack=true;
     private bool Left;
@@ -18,6 +19,7 @@ public class PlayerAttack : MonoBehaviour
     private void Awake()
     {
         sR = GetComponent<SpriteRenderer>();
+        anim=GetComponent<Animator>();
         movement = GetComponent<Movement>();
         attackRight = transform.Find("AttackRight").gameObject;
         attackLeft = transform.Find("AttackLeft").gameObject;
@@ -38,6 +40,7 @@ public class PlayerAttack : MonoBehaviour
         CheckLR();
         if (AttackClick && !Left&& canAttack)
         {
+            anim.SetTrigger("attack");
             canAttack = false;
             StartCoroutine(AttackCd(attackCd));
             attackRight.SetActive(true);
@@ -47,6 +50,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (AttackClick && Left && canAttack)
         {
+            anim.SetTrigger("attack");
             canAttack = false;
             StartCoroutine(AttackCd(attackCd));
             attackLeft.SetActive(true);

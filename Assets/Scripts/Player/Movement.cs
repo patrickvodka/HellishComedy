@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 
 [RequireComponent (typeof(Collision))]
@@ -44,6 +45,9 @@ public class Movement : MonoBehaviour
     private bool onDashClick;
     private bool groundTouch;
     private bool hasDashed;
+    public float RunTime;
+
+    public bool Run;
     [Space] 
     public Sprite FallenWhite;
     public Sprite FallenPurple;
@@ -94,6 +98,42 @@ public class Movement : MonoBehaviour
     {
         Vector2 dir = new Vector2(Dir.x,Dir.y);
 
+
+        if (HasADash)
+        {
+            anim.SetBool("hasDash", true);
+        }
+        else
+        {
+            anim.SetBool("hasDash", false);
+        }
+
+        if (groundTouch)
+        {
+            anim.SetBool("ground",true);
+        }
+        else 
+            anim.SetBool("ground",false);
+
+        if (DirRaw.x == 0 && groundTouch)
+        {
+            anim.SetBool("run",false);
+        }
+        if (DirRaw.x != 0  && groundTouch)
+        {
+            StartCoroutine(TimeRun());
+            if (Run)
+            {
+                anim.SetBool("run",true);
+            }
+            else
+            {
+                anim.SetBool("run",false);
+            }
+            //if (!Run)
+               // anim.enabled.flag;
+        }
+        
         Walk(dir);
         var check = !HasADash ? sR.sprite = FallenPurple : sR.sprite = FallenWhite;
         
@@ -115,6 +155,7 @@ public class Movement : MonoBehaviour
         {
             GhostTrail=true;
             Jump(Vector2.up);
+            anim.SetTrigger("jump");
         }
 
         if ( onDashClick  && !hasDashed && HasADash &&!groundTouch)
@@ -164,6 +205,7 @@ public class Movement : MonoBehaviour
     private void Dash(float x, float y)
     {
         FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
+        anim.SetTrigger("dash");
         hasDashed = true;
         canMove = false;
         rb.velocity = Vector2.zero;
@@ -171,10 +213,12 @@ public class Movement : MonoBehaviour
         var lineJump = new Vector2(0, 1);
         if (dir == lineJump)
         {
+            anim.SetTrigger("dashUp");
             rb.velocity = dir * (dashSpeed);
         }
         else
         {
+            anim.SetTrigger("dashSide");
             rb.velocity = dir * dashSpeed;
         }
         StartCoroutine(DashWait(TimeDash));
@@ -227,5 +271,16 @@ public class Movement : MonoBehaviour
         canMove = false;
         yield return new WaitForSeconds(time);
         canMove = true;
+    }
+
+    IEnumerator TimeRun()
+    {
+        yield return new WaitForSeconds(.03f);
+        if (DirRaw.x != 0)
+        {
+            Run = true;
+        }
+        else
+            Run = false;
     }
 }

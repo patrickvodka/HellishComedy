@@ -119,7 +119,7 @@ public class Movement : MonoBehaviour
         {
             anim.SetBool("run",false);
         }
-        if (DirRaw.x != 0  && groundTouch)
+        if (DirRaw.x != 0  && groundTouch &&canMove)
         {
             StartCoroutine(TimeRun());
             if (Run)

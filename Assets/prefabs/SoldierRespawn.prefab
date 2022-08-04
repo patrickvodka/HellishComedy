@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 872441894005000086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -0.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 872441894851423457}
   - component: {fileID: 8916453996485752962}
   - component: {fileID: 1809697445401404251}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SoldierS.R
   m_TagString: Soldier
   m_Icon: {fileID: 0}
@@ -393,15 +393,16 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: -0.47, y: -0.47}
-  - {x: -0.20493698, y: -0.24354503}
-  - {x: -0.17468351, y: 0.36544248}
-  - {x: 0.021736585, y: 0.472171}
-  - {x: 0.2346835, y: 0.3175942}
-  - {x: 0.17518973, y: -0.17265859}
+  - {x: -0.18012673, y: -0.24708933}
+  - {x: -0.17988399, y: 0.33159307}
+  - {x: -0.12860733, y: 0.4717721}
+  - {x: 0.18506299, y: 0.4717722}
+  - {x: 0.23233373, y: 0.3237197}
+  - {x: 0.23012674, y: -0.23468423}
   - {x: 0.49, y: -0.47}
   - {x: -0.47, y: -0.47}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_AdjacentStartPoint: {x: -0.31, y: 0}
+  m_AdjacentEndPoint: {x: -0.63, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
 --- !u!1 &5400989387439229961

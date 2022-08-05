@@ -148,8 +148,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: -5
-  Goject: {fileID: 3408090772909026390, guid: c07b3ffc1a81ac245b2c20c45a62804a, type: 3}
-  Goject1: {fileID: 7314121179883591537, guid: 168d032775657dc479ec24cfa950938a, type: 3}
+  DroiteHaut: {fileID: 3408090772909026390, guid: 916be86184cef4e4985d9b79b4f92d12, type: 3}
+  DroiteBas: {fileID: 3408090772909026390, guid: c07b3ffc1a81ac245b2c20c45a62804a, type: 3}
+  GaucheBas: {fileID: 7314121179883591537, guid: 168d032775657dc479ec24cfa950938a, type: 3}
+  GaucheHaut: {fileID: 7314121179883591537, guid: 528c8614cf50e3b45a519c5fad3e959c, type: 3}
 --- !u!95 &1660576073819039183
 Animator:
   serializedVersion: 4

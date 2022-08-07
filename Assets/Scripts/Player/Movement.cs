@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
     [HideInInspector]
     public Rigidbody2D rb;
     [HideInInspector]
-    public bool GhostTrail=false,maxJumpBool=false,isJumping;
+    public bool GhostTrail=false,maxJumpBool=false,isJumping,canDash=true;
     //<>
 
 
@@ -96,7 +96,7 @@ public class Movement : MonoBehaviour
     }
     void Update()
     {
-        Vector2 dir = new Vector2(Dir.x,Dir.y);
+        Vector2 dir = new Vector2(Dir.x,Dir.y).normalized;
 
 
         if (HasADash)
@@ -135,7 +135,7 @@ public class Movement : MonoBehaviour
         }
         
         Walk(dir);
-        var check = !HasADash ? sR.sprite = FallenPurple : sR.sprite = FallenWhite;
+        //var check = !HasADash ? sR.sprite = FallenPurple : sR.sprite = FallenWhite;
         
 
         if (coll.onGround && !isDashing)
@@ -158,12 +158,14 @@ public class Movement : MonoBehaviour
             anim.SetTrigger("jump");
         }
 
-        if ( onDashClick  && !hasDashed && HasADash &&!groundTouch)
+        if ( onDashClick  && !hasDashed && HasADash &&!groundTouch&& canDash)
         {
             if (DirRaw.x != 0 || DirRaw.y != 0)
             {
                 GhostTrail=true;
-                Dash(DirRaw.x, DirRaw.y);
+                var dashDir = new Vector2(DirRaw.x, DirRaw.y).normalized;
+               // Dash(DirRaw.x, DirRaw.y);
+               Dash(dashDir.x,dashDir.y);
                 HasADash = false;
             }
         }

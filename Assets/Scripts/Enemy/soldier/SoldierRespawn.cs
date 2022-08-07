@@ -9,8 +9,19 @@ public class SoldierRespawn : MonoBehaviour
     [HideInInspector]
     public GameObject _soldierObj;
 
+    [HideInInspector]
+    public bool canSpawn=false,canBeActive=false;
+    
+
     void Update()
     {
+       /* if (canBeActive&&canSpawn)
+        {
+            canBeActive = false;
+            canSpawn = false;
+            _soldierObj = transform.GetChild(0).gameObject;
+            _soldierObj.SetActive(true);
+        }*/
         if (soldierDied)
         {
             soldierDied = false;
@@ -23,5 +34,6 @@ public class SoldierRespawn : MonoBehaviour
         yield return new WaitForSeconds(spawnTimer);
         _soldierObj = transform.GetChild(0).gameObject;
         _soldierObj.SetActive(true);
+        //canSpawn = true;
     }
 }

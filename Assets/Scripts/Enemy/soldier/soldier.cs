@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Runtime.Serialization;
 using Unity.Mathematics;
@@ -31,13 +32,17 @@ public class soldier : MonoBehaviour
     private GameObject BulletDown;
     private GameObject BulletUp;
     private GameObject BulletChoose;
+    private SoldierRespawn soldierRespawn;
     
     private bool canShoot=true;
     private Transform transformGun;
+    //private Collider2D collider2D;
     
    
    private void Awake()
    {
+    //   collider2D = GetComponent<Collider2D>();
+     //  soldierRespawn = transform.parent.GetComponent<SoldierRespawn>();
        SoldierSr = transform.Find("SoldierS.R");
         SpawnBulletUp = transform.Find("SpawnBulletUp");
         SpawnBulletDown = transform.Find("SpawnBulletDown");
@@ -95,6 +100,19 @@ public class soldier : MonoBehaviour
         }
     }
 
+   /* private void Update()
+    {
+        if (collider2D.IsTouchingLayers(128))
+        {
+            soldierRespawn.canBeActive = false; 
+        }
+        else
+        {
+            soldierRespawn.canBeActive = true;
+        }
+    }*/
+
+
     void Shoot()
     {
         audioS.Play(0);
@@ -108,4 +126,32 @@ public class soldier : MonoBehaviour
         canShoot = true;
 
     }
+
+   /* private void OnTriggerStay2D(Collider2D coll)
+    {
+        if (coll.CompareTag("Player"))
+        {
+            Debug.Log("stay");
+            soldierRespawn.canBeActive = false;
+        }
+       /* else
+        {
+            Debug.Log("stayelse");
+            soldierRespawn.canBeActive = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            Debug.Log("exit");
+            soldierRespawn.canBeActive = true;
+        }
+        /*else
+        {
+            Debug.Log("exitelse");
+            soldierRespawn.canBeActive = true;
+        }
+    }*/
 }

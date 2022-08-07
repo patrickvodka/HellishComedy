@@ -18,122 +18,87 @@ public class SoldierColl : MonoBehaviour
    
 
     private void OnCollisionEnter2D (Collision2D coll2D)
-    { 
+    {
         if (coll2D.gameObject.CompareTag("Player"))
         {
-             ContactPoint2D contact = coll2D.contacts[0];
-           //  Vector2 bulletContact = contact.rigidbody.position;
-           // Vector2 playerTrans = col.rigidbody.ClosestPoint(transform.position);
+            ContactPoint2D contact = coll2D.contacts[0];
+            //  Vector2 bulletContact = contact.rigidbody.position;
+            // Vector2 playerTrans = col.rigidbody.ClosestPoint(transform.position);
             var bulletNormal = contact.normal.normalized;
-            Debug.Log(bulletNormal);
-            if (bulletNormal.x==0f)//si x est 0
+            if (bulletNormal.x == 0f) //si x est 0
             {
                 if (randomBool)
                 {
                     randomBool = false;
-                    randomNum = UnityEngine.Random.Range(0,2);
+                    randomNum = UnityEngine.Random.Range(0, 2);
                 }
+
                 if (randomNum == 0)
                 {
-                    bulletNormal.x=0.1f;
+                    bulletNormal.x = 0.1f;
                 }
                 else
                 {
-                    bulletNormal.x=-0.1f;
+                    bulletNormal.x = -0.1f;
                 }
             }
-            if (bulletNormal.x > 0)//si la balle a touché a droite(balle)
+
+            if (bulletNormal.x > 0) //si la balle a touché a droite(balle)
             {
-                if (bulletNormal.y >0)//si la balle a touché a droite en haut (balle)
+                if (bulletNormal.y > 0) //si la balle a touché a droite en haut (balle)
                 {
                     HitBullet.Instance.HitBulletSoldierLeft();
-                   // Debug.Log("DroiteHaut");
-                  // Debug.Log(bulletNormal);
+                    // Debug.Log("DroiteHaut");
+                    // Debug.Log(bulletNormal);
                 }
-                else//si la balle a touché a droite en bas et a 0(balle)
+                else //si la balle a touché a droite en bas et a 0(balle)
                 {
                     HitBullet.Instance.HitBulletSoldierLeft();
-                  //  Debug.Log(bulletNormal);
-                   // Debug.Log("DroiteBas");
+                    //  Debug.Log(bulletNormal);
+                    // Debug.Log("DroiteBas");
                 }
             }
-            if(bulletNormal.x<0)//si la balle a touché a gauche (balle)
+
+            if (bulletNormal.x < 0) //si la balle a touché a gauche (balle)
             {
-                if (bulletNormal.y <0)//si la balle a touché gauche haut  (balle)
+                if (bulletNormal.y < 0) //si la balle a touché gauche haut  (balle)
                 {
                     HitBullet.Instance.HitBulletSoldierRight();
-                  //  Debug.Log("gaucheHaut");
-                  //  Debug.Log(bulletNormal);
+                    //  Debug.Log("gaucheHaut");
+                    //  Debug.Log(bulletNormal);
                 }
-                else//si la balle a touché a gauche bas et 0 (balle)
+                else //si la balle a touché a gauche bas et 0 (balle)
                 {
                     HitBullet.Instance.HitBulletSoldierRight();
-                   // Debug.Log("gauchebas");
-                   // Debug.Log(bulletNormal);
+                    // Debug.Log("gauchebas");
+                    // Debug.Log(bulletNormal);
                 }
             }
         }
 
-    }
+    } 
 
-    private void OnCollisionStay2D(Collision2D collStay2D)
+    private void OnColliderStay2D(Collider2D collStay2D)
     {
-        if (collStay2D.gameObject.CompareTag("Player"))
+        if (collStay2D.CompareTag("Player"))
         {
-             if (collStay2D.gameObject.CompareTag("Player"))
-        {
-             ContactPoint2D contact = collStay2D.contacts[0];
-           //  Vector2 bulletContact = contact.rigidbody.position;
-           // Vector2 playerTrans = col.rigidbody.ClosestPoint(transform.position);
-            var bulletNormal = contact.normal.normalized;
-            Debug.Log(bulletNormal);
-            if (bulletNormal.x==0f)//si x est 0
+            if (randomBool) 
             {
-                if (randomBool)
-                {
                     randomBool = false;
                     randomNum = UnityEngine.Random.Range(0,2);
-                }
-                if (randomNum == 0)
-                {
-                    bulletNormal.x=0.1f;
-                }
-                else
-                {
-                    bulletNormal.x=-0.1f;
-                }
-            }
-            if (bulletNormal.x > 0)//si la balle a touché a droite(balle)
+            } 
+            if (randomNum == 0)
             {
-                if (bulletNormal.y >0)//si la balle a touché a droite en haut (balle)
-                {
                     HitBullet.Instance.HitBulletSoldierLeft();
-                   // Debug.Log("DroiteHaut");
-                  // Debug.Log(bulletNormal);
-                }
-                else//si la balle a touché a droite en bas et a 0(balle)
-                {
-                    HitBullet.Instance.HitBulletSoldierLeft();
-                  //  Debug.Log(bulletNormal);
-                   // Debug.Log("DroiteBas");
-                }
+                    randomBool = true;
             }
-            if(bulletNormal.x<0)//si la balle a touché a gauche (balle)
+            else
             {
-                if (bulletNormal.y <0)//si la balle a touché gauche haut  (balle)
-                {
                     HitBullet.Instance.HitBulletSoldierRight();
-                  //  Debug.Log("gaucheHaut");
-                  //  Debug.Log(bulletNormal);
-                }
-                else//si la balle a touché a gauche bas et 0 (balle)
-                {
-                    HitBullet.Instance.HitBulletSoldierRight();
-                   // Debug.Log("gauchebas");
-                   // Debug.Log(bulletNormal);
-                }
+                    randomBool = true;
             }
-        }
+         
+            
         }
     }
 }

@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using Random = Unity.Mathematics.Random;
 
 public class HitBullet : MonoBehaviour
 {
@@ -11,19 +7,15 @@ public class HitBullet : MonoBehaviour
     private SpriteRenderer Sr;
     public static HitBullet Instance;
     
-    private GameObject BulletRight;
-    private GameObject BulletLeft;
-    private GameObject BulletUp;
-    private GameObject BulletDown;
 
     //private bool randomBool;
     private bool HitRight;
     private bool HitLeft;
     //private bool HitUpDown;
-    private bool canBeHit=true;
+   // private bool canBeHit=true;
 
     [Header("Temps du stun Default=120, Nombre Pair Only")]
-    public int EndTime;
+    public int endTime;
     [Header("Vélocité de la chute Default=5 ")]
     public float fallVelocity;
 
@@ -32,12 +24,15 @@ public class HitBullet : MonoBehaviour
     private int RandomNumber;
     private int StartTime = 0;
     private Movement movement;
+    private Animator anim;
+    private bool stunAnim;
 
     private void Awake()
     {
         Sr=GetComponent<SpriteRenderer>();
         movement = GetComponent<Movement>();
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         Instance = this;
     }
 
@@ -45,17 +40,21 @@ public class HitBullet : MonoBehaviour
     {
         if (HitRight)
         {
-            canBeHit = false;
+            stunAnim = true;
+            anim.SetBool("stun",true);
             movement.canMove = false;
             movement.canJump = false;
+            movement.canDash = false;
             rb.velocity = new Vector2(0,rb.velocity.y );
             FallPlayer(fallVelocity);
         }
         if (HitLeft)
         {
-            canBeHit = false;
+            stunAnim = true;
+            anim.SetBool("stun",true);
             movement.canMove = false;
             movement.canJump = false;
+            movement.canDash = false;
             rb.velocity = new Vector2(0,rb.velocity.y );
             FallPlayer(-fallVelocity);
         }
@@ -100,7 +99,7 @@ public class HitBullet : MonoBehaviour
 
       void FallPlayer(float x)
     {
-        if (StartTime < EndTime)
+        if (StartTime < endTime)
         {
             Sr.enabled=false;
             rb.velocity = new Vector2(x/*1.5f*/, rb.velocity.y);
@@ -111,14 +110,13 @@ public class HitBullet : MonoBehaviour
                 Sr.enabled=true;  
             }
             StartTime++;
-            Debug.Log(StartTime);
         }
         else
         {
-            Debug.Log("start");
             Sr.enabled=true; 
-            canBeHit = true;
             movement.canJump = true;
+            movement.canDash = true;
+            anim.SetBool("stun",false);
             //HitUpDown = false;
             HitLeft = false;
             HitRight = false;

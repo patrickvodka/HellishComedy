@@ -33,7 +33,6 @@ public class SoldierBulletLeft : MonoBehaviour
             // Vector2 bulletContact = contact.rigidbody.position;
             //Vector2 playerTrans = col.rigidbody.ClosestPoint(transform.position);
             var bulletNormal = contact.normal.normalized;
-            Debug.Log(bulletNormal);
             if (bulletNormal.x==0f)//si x est 0
             {
                 
